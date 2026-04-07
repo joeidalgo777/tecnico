@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Joe Idalgo | Técnico Raiz</title>
+
+<title>Joe Idalgo | Elite Tech</title>
+
+<link rel="icon" type="image/png" href="favicon.png">
 
 <style>
 :root{
@@ -20,6 +23,22 @@ color:white;
 overflow-x:hidden;
 }
 
+body::before{
+content:"";
+position:fixed;
+width:100%;
+height:100%;
+background:linear-gradient(transparent 90%, rgba(0,255,159,0.1));
+background-size:100% 3px;
+animation:scan 4s linear infinite;
+pointer-events:none;
+}
+
+@keyframes scan{
+0%{background-position:0 0}
+100%{background-position:0 100%}
+}
+
 .hero{
 height:100vh;
 display:flex;
@@ -30,8 +49,20 @@ text-align:center;
 padding:20px;
 }
 
-.hero h1{font-size:3rem;}
+.hero h1{
+font-size:3rem;
+text-shadow:0 0 20px #00ff9f;
+animation:glitch 2s infinite;
+}
+
+@keyframes glitch{
+0%{text-shadow:2px 0 red,-2px 0 cyan}
+50%{text-shadow:-2px 0 red,2px 0 cyan}
+100%{text-shadow:2px 0 red,-2px 0 cyan}
+}
+
 .hero span{color:var(--accent)}
+
 .logos{
 margin-top:10px;
 font-size:1.5rem;
@@ -48,6 +79,11 @@ background:var(--accent);
 color:black;
 text-decoration:none;
 font-weight:bold;
+transition:0.3s;
+}
+
+.btn:hover{
+box-shadow:0 0 20px var(--accent);
 }
 
 section{padding:60px 20px;max-width:1000px;margin:auto}
@@ -57,6 +93,12 @@ background:#0a0f18;
 padding:20px;
 margin:10px 0;
 border-left:3px solid var(--accent);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateX(10px) scale(1.02);
+box-shadow:0 0 15px #00ff9f66;
 }
 
 .terminal{
@@ -64,6 +106,8 @@ background:#000;
 padding:20px;
 color:#00ff9f;
 font-size:0.9rem;
+height:160px;
+overflow:hidden;
 }
 
 .online{
@@ -90,109 +134,191 @@ padding:15px;
 border-radius:50%;
 text-decoration:none;
 font-weight:bold;
+box-shadow:0 0 20px #00ff9f;
 }
 
 footer{text-align:center;padding:20px;color:#444}
 
+/* MAPS */
+.map{
+margin-top:30px;
+border:2px solid #00ff9f33;
+box-shadow:0 0 20px #00ff9f22;
+}
+
+#secretPanel{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+color:#00ff9f;
+z-index:9999;
+padding:20px;
+font-size:14px;
+overflow:auto;
+}
 </style>
 </head>
 
 <body>
 
-<div class="online">● ONLINE</div>
+<div class="online">● SYSTEM ONLINE</div>
 
 <section class="hero">
 <h1>Joe <span>Idalgo</span></h1>
+
 <div class="logos">
   <span>🪟</span>
   <span>🍎</span>
   <span>🤖</span>
   <span>🧠</span>
 </div>
+
 <p id="typing"></p>
-<a class="btn" href="https://wa.me/5511997826250?text=Preciso%20de%20ajuda%20urgente%20com%20meu%20dispositivo" target="_blank">CHAMAR NO WHATSAPP</a>
+
+<a class="btn" href="https://wa.me/5511997826250" target="_blank">
+INICIAR SUPORTE
+</a>
 </section>
 
 <section>
 <h2>Serviços</h2>
-<div class="card">✔ Troca de display (quebrado / touch não responde)</div>
-<div class="card">✔ Troca de bateria (não segura carga)</div>
-<div class="card">✔ Recuperação de sistema Android / iOS</div>
-<div class="card">✔ Desbloqueio e reinstalação de software</div>
-<div class="card">✔ Recuperação de dados (fotos, arquivos)</div>
-<div class="card">✔ Montagem e upgrade de PCs</div>
-<div class="card">✔ Formatação e otimização extrema</div>
-</section>
-
-<section id="arquivos" style="display:none">
-<h2>Arquivos Técnicos</h2>
-<div class="card">📦 Scripts Platinum - <a href="/files/platinum.zip" target="_blank">Download</a></div>
-<div class="card">💽 ISO Windows - <a href="/files/windows.iso" target="_blank">Download</a></div>
-<div class="card">🛠️ Ferramentas - <a href="/files/tools.zip" target="_blank">Download</a></div>
+<div class="card">✔ Hardware repair / troca de peças</div>
+<div class="card">✔ Sistema corrompido / boot</div>
+<div class="card">✔ Recuperação de dados</div>
+<div class="card">✔ Android / iOS restore</div>
+<div class="card">✔ Upgrade de PCs</div>
+<div class="card">✔ Otimização extrema</div>
 </section>
 
 <section>
-<h2>Logs recentes</h2>
+<h2>Logs do sistema</h2>
 <div class="terminal" id="logs"></div>
 </section>
 
 <section>
 <h2>Localização</h2>
-<p style="color:var(--text)">📍 Av. Maria José de Siqueira Melo, 115 B - Biritiba Mirim</p>
-<a class="btn" href="https://www.google.com/maps/search/?api=1&query=Av.+Maria+José+de+Siqueira+Melo,+115+B,+Biritiba+Mirim" target="_blank">ABRIR NO MAPA</a>
+
+<div class="card">
+<p>> endereço detectado:</p>
+
+<p style="color:#00ff9f; font-size:1.1rem;">
+Av Maria José de Siqueira Melo, 115 B<br>
+Biritiba Mirim - SP<br>
+CEP: 08940-000
+</p>
+
+<br>
+
+<a class="btn" 
+href="https://www.google.com/maps/search/?api=1&query=Av+Maria+Jose+de+Siqueira+Melo+115+B+Biritiba+Mirim+SP"
+target="_blank">
+ABRIR NO MAPS
+</a>
+
+</div>
+
 </section>
 
-<a class="float" href="https://wa.me/5511997826250?text=URGENTE" target="_blank">!</a>
+<div id="secretPanel">
+<h2>🔐 ACESSO ELITE LIBERADO</h2>
+<div id="secretLogs"></div>
+<br>
+<button onclick="document.getElementById('secretPanel').style.display='none'">
+FECHAR
+</button>
+</div>
+
+<a class="float" href="https://wa.me/5511997826250" target="_blank">!</a>
 
 <footer>
 <p>Joe Idalgo © 2026</p>
 </footer>
 
 <script>
-// efeito digitando (mais vendedor)
-const text = "Sistema com problema?... relaxa. Eu resolvo. Iniciando diagnóstico...";
+
+// TEXTO HERO
+const text = ">> Iniciando diagnóstico...\n>> Analisando sistema...\n>> Falhas detectadas...\n>> Solução pronta.";
 let i = 0;
+
 function typing(){
  if(i < text.length){
  document.getElementById("typing").innerHTML += text.charAt(i);
  i++;
- setTimeout(typing, 40);
+ setTimeout(typing, 25);
  }
 }
 typing();
 
-// logs mais realistas
-const logs = [
-"> iniciando varredura...",
-"> sistema corrompido detectado",
-"> aplicando patch...",
-"> limpando processos...",
-"> performance restaurada"
+// 🔥 LOGS CONTROLADOS (7 LINHAS)
+const logMessages = [
+"> booting kernel...",
+"> loading drivers...",
+"> scanning hardware...",
+"> detecting failures...",
+"> applying fixes...",
+"> optimizing system...",
+"> system stable ✔"
 ];
 
-let j=0;
+let logIndex = 0;
+
 function showLogs(){
- if(j < logs.length){
- document.getElementById("logs").innerHTML += logs[j] + "<br>";
- j++;
- setTimeout(showLogs, 800);
+ const el = document.getElementById("logs");
+
+ if(logIndex < logMessages.length){
+  el.innerHTML += logMessages[logIndex] + "<br>";
+  logIndex++;
+  setTimeout(showLogs, 800);
  }
 }
+
 showLogs();
 
-// acesso secreto melhorado
+// AREA SECRETA
 let buffer = "";
+
 window.addEventListener("keydown", e => {
-  buffer += e.key.toLowerCase();
+ buffer += e.key.toLowerCase();
 
-  if(buffer.length > 10) buffer = buffer.slice(-10);
+ if(buffer.length > 20) buffer = buffer.slice(-20);
 
-  if(buffer.includes("elite123")){
-    document.getElementById("arquivos").style.display = "block";
-    window.scrollTo({ top: document.getElementById("arquivos").offsetTop, behavior: "instant" });
-    buffer = "";
-  }
+ if(buffer.includes("rootaccess")){
+  activateSecret();
+  buffer="";
+ }
 });
+
+function activateSecret(){
+ const panel = document.getElementById("secretPanel");
+ const logs = document.getElementById("secretLogs");
+
+ panel.style.display = "block";
+
+ const eliteLogs = [
+"> root granted...",
+"> decrypting data...",
+"> accessing hidden modules...",
+"> injecting ultra tools...",
+"> elite mode activated ⚡"
+];
+
+ let i = 0;
+
+ function show(){
+  if(i < eliteLogs.length){
+   logs.innerHTML += eliteLogs[i] + "<br>";
+   i++;
+   setTimeout(show, 500);
+  }
+ }
+
+ show();
+}
+
 </script>
 
 </body>
