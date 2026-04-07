@@ -3,339 +3,181 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Joe Idalgo | Elite Tech</title>
-
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
 
 <style>
-:root{
---bg:#03050a;
---accent:#00ff9f;
---text:#9aa4b2;
-}
-
-body{
-margin:0;
-font-family:Consolas, monospace;
-background:var(--bg);
-color:white;
-overflow-x:hidden;
-}
-
-body::before{
-content:"";
-position:fixed;
-width:100%;
-height:100%;
-background:linear-gradient(transparent 90%, rgba(0,255,159,0.1));
-background-size:100% 3px;
-animation:scan 4s linear infinite;
-pointer-events:none;
-}
-
-@keyframes scan{
-0%{background-position:0 0}
-100%{background-position:0 100%}
-}
-
-.hero{
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:20px;
-}
-
-.hero h1{
-font-size:3rem;
-text-shadow:0 0 20px #00ff9f;
-animation:glitch 2s infinite;
-}
-
-@keyframes glitch{
-0%{text-shadow:2px 0 red,-2px 0 cyan}
-50%{text-shadow:-2px 0 red,2px 0 cyan}
-100%{text-shadow:2px 0 red,-2px 0 cyan}
-}
-
+:root{ --bg:#03050a; --accent:#00ff9f; --text:#9aa4b2; }
+body{ margin:0; font-family:Consolas, monospace; background:var(--bg); color:white; overflow-x:hidden; }
+body::before{ content:""; position:fixed; width:100%; height:100%; background:linear-gradient(transparent 90%, rgba(0,255,159,0.1)); background-size:100% 3px; animation:scan 4s linear infinite; pointer-events:none; }
+@keyframes scan{ 0%{background-position:0 0} 100%{background-position:0 100%} }
+.hero{ height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:20px; }
+.hero h1{ font-size:3rem; text-shadow:0 0 20px #00ff9f; animation:glitch 2s infinite; }
+@keyframes glitch{ 0%{text-shadow:2px 0 red,-2px 0 cyan} 50%{text-shadow:-2px 0 red,2px 0 cyan} 100%{text-shadow:2px 0 red,-2px 0 cyan} }
 .hero span{color:var(--accent)}
+.logos{ margin-top:10px; font-size:1.5rem; letter-spacing:10px; opacity:0.8; }
+.hero p{color:var(--text); max-width:600px; min-height:60px; white-space: pre-wrap;}
+.btn{ margin-top:20px; padding:15px 30px; background:var(--accent); color:black; text-decoration:none; font-weight:bold; transition:0.3s; border:none; cursor:pointer; font-family:Consolas, monospace;}
+.btn:hover{ box-shadow:0 0 20px var(--accent); }
+section{padding:60px 20px; max-width:1000px; margin:auto}
+.card{ background:#0a0f18; padding:20px; margin:10px 0; border-left:3px solid var(--accent); transition:0.3s; }
+.card:hover{ transform:translateX(10px) scale(1.02); box-shadow:0 0 15px #00ff9f66; }
+.terminal{ background:#000; padding:20px; color:#00ff9f; font-size:0.9rem; height:160px; overflow:hidden; border:1px solid #00ff9f33; }
+.online{ position:fixed; top:10px; right:20px; color:#00ff9f; font-size:0.8rem; animation:blink 1s infinite; }
+@keyframes blink{ 0%,100%{opacity:1} 50%{opacity:0.3} }
+.float{ position:fixed; bottom:20px; right:20px; background:#00ff9f; color:black; padding:15px; border-radius:50%; text-decoration:none; font-weight:bold; box-shadow:0 0 20px #00ff9f; }
+footer{text-align:center; padding:20px; color:#444}
 
-.logos{
-margin-top:10px;
-font-size:1.5rem;
-letter-spacing:10px;
-opacity:0.8;
-}
-
-.hero p{color:var(--text);max-width:600px;min-height:60px}
-
-.btn{
-margin-top:20px;
-padding:15px 30px;
-background:var(--accent);
-color:black;
-text-decoration:none;
-font-weight:bold;
-transition:0.3s;
-}
-
-.btn:hover{
-box-shadow:0 0 20px var(--accent);
-}
-
-section{padding:60px 20px;max-width:1000px;margin:auto}
-
-.card{
-background:#0a0f18;
-padding:20px;
-margin:10px 0;
-border-left:3px solid var(--accent);
-transition:0.3s;
-}
-
-.card:hover{
-transform:translateX(10px) scale(1.02);
-box-shadow:0 0 15px #00ff9f66;
-}
-
-.terminal{
-background:#000;
-padding:20px;
-color:#00ff9f;
-font-size:0.9rem;
-height:160px;
-overflow:hidden;
-}
-
-.online{
-position:fixed;
-top:10px;
-right:20px;
-color:#00ff9f;
-font-size:0.8rem;
-animation:blink 1s infinite;
-}
-
-@keyframes blink{
-0%,100%{opacity:1}
-50%{opacity:0.3}
-}
-
-.float{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#00ff9f;
-color:black;
-padding:15px;
-border-radius:50%;
-text-decoration:none;
-font-weight:bold;
-box-shadow:0 0 20px #00ff9f;
-}
-
-footer{text-align:center;padding:20px;color:#444}
-
-.map{
-margin-top:30px;
-border:2px solid #00ff9f33;
-box-shadow:0 0 20px #00ff9f22;
-}
-
-#secretPanel{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:black;
-color:#00ff9f;
-z-index:9999;
-padding:20px;
-font-size:14px;
-overflow:auto;
-}
+#secretPanel, #sendInfoPanel { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:black; color:#00ff9f; z-index:9999; padding:20px; font-size:14px; overflow:auto; }
+input, textarea { width:100%; background:#111; border:1px solid #00ff9f; color:white; padding:8px; margin-bottom:10px; font-family:Consolas, monospace; box-sizing: border-box;}
 </style>
 </head>
-
 <body>
 
 <div class="online">● SYSTEM ONLINE</div>
 
 <section class="hero">
-<h1>Joe <span>Idalgo</span></h1>
-
-<div class="logos">
-  <span>🪟</span>
-  <span>🍎</span>
-  <span>🤖</span>
-  <span>🧠</span>
-</div>
-
-<p id="typing"></p>
-
-<a class="btn" href="https://wa.me/5511997826250" target="_blank">
-INICIAR SUPORTE
-</a>
+    <h1>Joe <span>Idalgo</span></h1>
+    <div class="logos"><span>🪟</span><span>🍎</span><span>🤖</span><span>🧠</span></div>
+    <p id="typing"></p>
+    <a class="btn" href="https://wa.me/5511997826250" target="_blank">INICIAR SUPORTE</a>
 </section>
 
 <section>
-<h2>Serviços</h2>
-<div class="card">✔ Hardware repair / troca de peças</div>
-<div class="card">✔ Sistema corrompido / boot</div>
-<div class="card">✔ Recuperação de dados</div>
-<div class="card">✔ Android / iOS restore</div>
-<div class="card">✔ Upgrade de PCs</div>
-<div class="card">✔ Otimização extrema</div>
+    <h2>Serviços</h2>
+    <div class="card">✔ Hardware repair / troca de peças</div>
+    <div class="card">✔ Sistema corrompido / boot</div>
+    <div class="card">✔ Recuperação de dados</div>
+    <div class="card">✔ Android / iOS restore</div>
+    <div class="card">✔ Upgrade de PCs</div>
+    <div class="card">✔ Otimização extrema</div>
 </section>
 
 <section>
-<h2>Logs do sistema</h2>
-<div class="terminal" id="logs"></div>
+    <h2>Logs do sistema</h2>
+    <div class="terminal" id="logs"></div>
 </section>
 
 <section>
-<h2>Localização</h2>
-
-<div class="card">
-<p>> endereço detectado:</p>
-
-<p style="color:#00ff9f; font-size:1.1rem;">
-Av Maria José de Siqueira Melo, 115 B<br>
-Biritiba Mirim - SP<br>
-CEP: 08940-000
-</p>
-
-<br>
-
-<a class="btn" 
-href="https://www.google.com/maps/search/?api=1&query=Av+Maria+Jose+de+Siqueira+Melo+115+B+Biritiba+Mirim+SP"
-target="_blank">
-ABRIR NO MAPS
-</a>
-
-</div>
-
+    <h2>Localização</h2>
+    <div class="card">
+        <p>> endereço detectado:</p>
+        <p style="color:#00ff9f; font-size:1.1rem;">Av Maria José de Siqueira Melo, 115 B<br>Biritiba Mirim - SP<br>CEP: 08940-000</p>
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Av+Maria+Jose+de+Siqueira+Melo+115B+Biritiba+Mirim" target="_blank">ABRIR NO MAPS</a>
+    </div>
 </section>
 
-<!-- 🔐 PAINEL SECRETO -->
 <div id="secretPanel">
-<h2>🔐 ACESSO ELITE LIBERADO</h2>
-<div id="secretLogs"></div>
-<br>
-<button onclick="document.getElementById('secretPanel').style.display='none'">
-FECHAR
-</button>
+    <h2>🔐 ACESSO ELITE LIBERADO</h2>
+    <div id="secretLogs"></div><br>
+    <button class="btn" onclick="document.getElementById('secretPanel').style.display='none'">FECHAR</button>
+</div>
+
+<div id="sendInfoPanel">
+    <h2>📑 FICHA DE SERVIÇO - ELITE TECH</h2>
+    <div style="max-width:400px; border:1px solid #00ff9f33; padding:15px;">
+        <p>Nome do Cliente:</p><input type="text" id="cliNome">
+        <p>Aparelho/Modelo:</p><input type="text" id="cliAparelho">
+        <p>Serviço Executado:</p><textarea id="cliServico"></textarea>
+        <p>Valor (R$):</p><input type="text" id="cliValor">
+        <p>WhatsApp (com DDD):</p><input type="text" id="cliFone" placeholder="119...">
+        <br><button class="btn" onclick="gerarRelatorio()" style="width:100%;">ENVIAR AO CLIENTE</button>
+        <br><br><button onclick="document.getElementById('sendInfoPanel').style.display='none'" style="color:red; background:none; border:none; cursor:pointer;">[ CANCELAR ]</button>
+    </div>
 </div>
 
 <a class="float" href="https://wa.me/5511997826250" target="_blank">!</a>
-
-<footer>
-<p>Joe Idalgo © 2026</p>
-</footer>
+<footer><p>Joe Idalgo © 2026</p></footer>
 
 <script>
+// AUDIO SYSTEM
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+function playBit(frequency = 440, duration = 0.05) {
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = 'square';
+    osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+    gain.gain.setValueAtTime(0.01, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    osc.start(); osc.stop(audioCtx.currentTime + duration);
+}
 
-// TEXTO HERO
+// TYPING EFFECT
 const text = ">> Iniciando diagnóstico...\n>> Analisando sistema...\n>> Falhas detectadas...\n>> Solução pronta.";
 let i = 0;
-
 function typing(){
- if(i < text.length){
- document.getElementById("typing").innerHTML += text.charAt(i);
- i++;
- setTimeout(typing, 25);
- }
+    if(i < text.length){
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        if(text.charAt(i) !== " " && text.charAt(i) !== "\n") playBit(600, 0.03);
+        i++; setTimeout(typing, 35);
+    }
 }
-typing();
+window.onload = typing;
 
 // LOGS
-const logMessages = [
-"> booting kernel...",
-"> loading drivers...",
-"> scanning hardware...",
-"> detecting failures...",
-"> applying fixes...",
-"> optimizing system...",
-"> system stable ✔"
-];
-
+const logMessages = ["> booting kernel...", "> loading drivers...", "> scanning hardware...", "> detecting failures...", "> applying fixes...", "> optimizing system...", "> system stable ✔"];
 let logIndex = 0;
-
 function showLogs(){
- const el = document.getElementById("logs");
-
- if(logIndex < logMessages.length){
-  el.innerHTML += logMessages[logIndex] + "<br>";
-  logIndex++;
-  setTimeout(showLogs, 800);
- }
+    const el = document.getElementById("logs");
+    if(logIndex < logMessages.length){
+        el.innerHTML += logMessages[logIndex] + "<br>";
+        playBit(300, 0.02);
+        logIndex++; setTimeout(showLogs, 800);
+    }
 }
-
 showLogs();
 
-// AREA SECRETA
+// KEYBOARD COMMANDS
 let buffer = "";
-
 document.addEventListener("keydown", e => {
- if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+    if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+    buffer += e.key.toLowerCase();
+    if(buffer.length > 20) buffer = buffer.slice(-20);
 
- buffer += e.key.toLowerCase();
-
- if(buffer.length > 20) buffer = buffer.slice(-20);
-
- if(buffer.includes("rootaccess")){
-  activateSecret();
-  buffer="";
- }
+    if(buffer.includes("rootaccess")){
+        playBit(800, 0.1); setTimeout(() => playBit(1200, 0.1), 100);
+        activateSecret(); buffer="";
+    }
+    if(buffer.includes("sendinfo")){
+        playBit(1000, 0.1);
+        document.getElementById("sendInfoPanel").style.display = "block";
+        buffer="";
+    }
 });
 
 function activateSecret(){
- const panel = document.getElementById("secretPanel");
- const logs = document.getElementById("secretLogs");
-
- panel.style.display = "block";
- logs.innerHTML = "";
-
- const eliteLogs = [
-"> root granted...",
-"> decrypting data...",
-"> accessing hidden modules...",
-"> preparing secure package...",
-"> injecting payload...",
-"> download autorizado ✔"
-];
-
- let i = 0;
-
- function show(){
-  if(i < eliteLogs.length){
-   logs.innerHTML += eliteLogs[i] + "<br>";
-   i++;
-   setTimeout(show, 500);
-  } else {
-   iniciarDownload();
-  }
- }
-
- show();
+    const panel = document.getElementById("secretPanel");
+    const logs = document.getElementById("secretLogs");
+    panel.style.display = "block"; logs.innerHTML = "";
+    const eliteLogs = ["> root granted...", "> decrypting data...", "> accessing hidden modules...", "> preparing secure package...", "> injecting payload...", "> download autorizado ✔"];
+    let idx = 0;
+    function show(){
+        if(idx < eliteLogs.length){
+            logs.innerHTML += eliteLogs[idx] + "<br>";
+            playBit(500, 0.05); idx++; setTimeout(show, 500);
+        } else { iniciarDownload(); }
+    }
+    show();
 }
 
-// 🚀 DOWNLOAD AUTOMÁTICO
 function iniciarDownload(){
- const link = document.createElement("a");
- link.href = "https://joeidalgo777.github.io/tecnico/Tools.rar";
- link.download = "Tools.rar";
- document.body.appendChild(link);
- link.click();
- document.body.removeChild(link);
+    const link = document.createElement("a");
+    link.href = "https://joeidalgo777.github.io/tecnico/Tools.rar";
+    link.download = "Tools.rar";
+    document.body.appendChild(link); link.click(); document.body.removeChild(link);
 }
 
+function gerarRelatorio() {
+    const nome = document.getElementById('cliNome').value;
+    const aparelho = document.getElementById('cliAparelho').value;
+    const servico = document.getElementById('cliServico').value;
+    const valor = document.getElementById('cliValor').value;
+    const fone = document.getElementById('cliFone').value;
+    const msg = `*ELITE TECH - INFORMATIVO*%0A%0A*Cliente:* ${nome}%0A*Aparelho:* ${aparelho}%0A*Serviço:* ${servico}%0A*Valor:* R$ ${valor}%0A%0A_Diagnóstico concluído com sucesso._`;
+    window.open(`https://wa.me/55${fone}?text=${msg}`, '_blank');
+}
 </script>
-
 </body>
 </html>
