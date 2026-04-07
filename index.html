@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joe Idalgo | Técnico Raiz</title>
+
+<style>
+:root{
+--bg:#03050a;
+--accent:#00ff9f;
+--text:#9aa4b2;
+}
+
+body{
+margin:0;
+font-family:Consolas, monospace;
+background:var(--bg);
+color:white;
+overflow-x:hidden;
+}
+
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+}
+
+.hero h1{font-size:3rem;}
+.hero span{color:var(--accent)}
+.logos{
+margin-top:10px;
+font-size:1.5rem;
+letter-spacing:10px;
+opacity:0.8;
+}
+
+.hero p{color:var(--text);max-width:600px;min-height:60px}
+
+.btn{
+margin-top:20px;
+padding:15px 30px;
+background:var(--accent);
+color:black;
+text-decoration:none;
+font-weight:bold;
+}
+
+section{padding:60px 20px;max-width:1000px;margin:auto}
+
+.card{
+background:#0a0f18;
+padding:20px;
+margin:10px 0;
+border-left:3px solid var(--accent);
+}
+
+.terminal{
+background:#000;
+padding:20px;
+color:#00ff9f;
+font-size:0.9rem;
+}
+
+.online{
+position:fixed;
+top:10px;
+right:20px;
+color:#00ff9f;
+font-size:0.8rem;
+animation:blink 1s infinite;
+}
+
+@keyframes blink{
+0%,100%{opacity:1}
+50%{opacity:0.3}
+}
+
+.float{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#00ff9f;
+color:black;
+padding:15px;
+border-radius:50%;
+text-decoration:none;
+font-weight:bold;
+}
+
+footer{text-align:center;padding:20px;color:#444}
+
+</style>
+</head>
+
+<body>
+
+<div class="online">● ONLINE</div>
+
+<section class="hero">
+<h1>Joe <span>Idalgo</span></h1>
+<div class="logos">
+  <span>🪟</span>
+  <span>🍎</span>
+  <span>🤖</span>
+  <span>🧠</span>
+</div>
+<p id="typing"></p>
+<a class="btn" href="https://wa.me/5511997826250?text=Preciso%20de%20ajuda%20urgente%20com%20meu%20dispositivo" target="_blank">CHAMAR NO WHATSAPP</a>
+</section>
+
+<section>
+<h2>Serviços</h2>
+<div class="card">✔ Troca de display (quebrado / touch não responde)</div>
+<div class="card">✔ Troca de bateria (não segura carga)</div>
+<div class="card">✔ Recuperação de sistema Android / iOS</div>
+<div class="card">✔ Desbloqueio e reinstalação de software</div>
+<div class="card">✔ Recuperação de dados (fotos, arquivos)</div>
+<div class="card">✔ Montagem e upgrade de PCs</div>
+<div class="card">✔ Formatação e otimização extrema</div>
+</section>
+
+<section id="arquivos" style="display:none">
+<h2>Arquivos Técnicos</h2>
+<div class="card">📦 Scripts Platinum - <a href="/files/platinum.zip" target="_blank">Download</a></div>
+<div class="card">💽 ISO Windows - <a href="/files/windows.iso" target="_blank">Download</a></div>
+<div class="card">🛠️ Ferramentas - <a href="/files/tools.zip" target="_blank">Download</a></div>
+</section>
+
+<section>
+<h2>Logs recentes</h2>
+<div class="terminal" id="logs"></div>
+</section>
+
+<section>
+<h2>Localização</h2>
+<p style="color:var(--text)">📍 Av. Maria José de Siqueira Melo, 115 B - Biritiba Mirim</p>
+<a class="btn" href="https://www.google.com/maps/search/?api=1&query=Av.+Maria+José+de+Siqueira+Melo,+115+B,+Biritiba+Mirim" target="_blank">ABRIR NO MAPA</a>
+</section>
+
+<a class="float" href="https://wa.me/5511997826250?text=URGENTE" target="_blank">!</a>
+
+<footer>
+<p>Joe Idalgo © 2026</p>
+</footer>
+
+<script>
+// efeito digitando (mais vendedor)
+const text = "Sistema com problema?... relaxa. Eu resolvo. Iniciando diagnóstico...";
+let i = 0;
+function typing(){
+ if(i < text.length){
+ document.getElementById("typing").innerHTML += text.charAt(i);
+ i++;
+ setTimeout(typing, 40);
+ }
+}
+typing();
+
+// logs mais realistas
+const logs = [
+"> iniciando varredura...",
+"> sistema corrompido detectado",
+"> aplicando patch...",
+"> limpando processos...",
+"> performance restaurada"
+];
+
+let j=0;
+function showLogs(){
+ if(j < logs.length){
+ document.getElementById("logs").innerHTML += logs[j] + "<br>";
+ j++;
+ setTimeout(showLogs, 800);
+ }
+}
+showLogs();
+
+// acesso secreto melhorado
+let buffer = "";
+window.addEventListener("keydown", e => {
+  buffer += e.key.toLowerCase();
+
+  if(buffer.length > 10) buffer = buffer.slice(-10);
+
+  if(buffer.includes("elite123")){
+    document.getElementById("arquivos").style.display = "block";
+    window.scrollTo({ top: document.getElementById("arquivos").offsetTop, behavior: "instant" });
+    buffer = "";
+  }
+});
+</script>
+
+</body>
+</html>
