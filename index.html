@@ -6,7 +6,7 @@
 
 <title>Joe Idalgo | Elite Tech</title>
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>⚙️</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
 
 <style>
 :root{
@@ -139,6 +139,12 @@ box-shadow:0 0 20px #00ff9f;
 
 footer{text-align:center;padding:20px;color:#444}
 
+.map{
+margin-top:30px;
+border:2px solid #00ff9f33;
+box-shadow:0 0 20px #00ff9f22;
+}
+
 #secretPanel{
 display:none;
 position:fixed;
@@ -157,11 +163,6 @@ overflow:auto;
 </head>
 
 <body>
-
-<!-- 🔊 SOM (AGORA NO LUGAR CERTO) -->
-<audio id="terminalSound" loop>
-  <source src="https://www.soundjay.com/mechanical/keyboard-typing-1.mp3" type="audio/mpeg">
-</audio>
 
 <div class="online">● SYSTEM ONLINE</div>
 
@@ -184,12 +185,12 @@ INICIAR SUPORTE
 
 <section>
 <h2>Serviços</h2>
-<div class="card">✔ Hardware repair</div>
-<div class="card">✔ Sistema corrompido</div>
+<div class="card">✔ Hardware repair / troca de peças</div>
+<div class="card">✔ Sistema corrompido / boot</div>
 <div class="card">✔ Recuperação de dados</div>
-<div class="card">✔ Android / iOS</div>
-<div class="card">✔ Upgrade PCs</div>
-<div class="card">✔ Otimização</div>
+<div class="card">✔ Android / iOS restore</div>
+<div class="card">✔ Upgrade de PCs</div>
+<div class="card">✔ Otimização extrema</div>
 </section>
 
 <section>
@@ -197,29 +198,41 @@ INICIAR SUPORTE
 <div class="terminal" id="logs"></div>
 </section>
 
-<!-- 🔐 PAINEL -->
-<div id="secretPanel">
-<h2>🔐 ACESSO ELITE LIBERADO</h2>
+<section>
+<h2>Localização</h2>
 
-<div id="secretLogs"></div>
-
-<br><br>
-
-<div id="downloads" style="display:none;">
 <div class="card">
-<p>> arquivo liberado:</p>
-<a class="btn" href="https://joeidalgo777.github.io/tecnico/Tools.rar" target="_blank">
-TOOLS.RAR
-</a>
-</div>
-</div>
+<p>> endereço detectado:</p>
+
+<p style="color:#00ff9f; font-size:1.1rem;">
+Av Maria José de Siqueira Melo, 115 B<br>
+Biritiba Mirim - SP<br>
+CEP: 08940-000
+</p>
 
 <br>
 
+<a class="btn" 
+href="https://www.google.com/maps/search/?api=1&query=Av+Maria+Jose+de+Siqueira+Melo+115+B+Biritiba+Mirim+SP"
+target="_blank">
+ABRIR NO MAPS
+</a>
+
+</div>
+
+</section>
+
+<!-- 🔐 PAINEL SECRETO -->
+<div id="secretPanel">
+<h2>🔐 ACESSO ELITE LIBERADO</h2>
+<div id="secretLogs"></div>
+<br>
 <button onclick="document.getElementById('secretPanel').style.display='none'">
 FECHAR
 </button>
 </div>
+
+<a class="float" href="https://wa.me/5511997826250" target="_blank">!</a>
 
 <footer>
 <p>Joe Idalgo © 2026</p>
@@ -227,25 +240,27 @@ FECHAR
 
 <script>
 
-// HERO
-const text = ">> Iniciando diagnóstico...\n>> Sistema OK.";
+// TEXTO HERO
+const text = ">> Iniciando diagnóstico...\n>> Analisando sistema...\n>> Falhas detectadas...\n>> Solução pronta.";
 let i = 0;
+
 function typing(){
  if(i < text.length){
-  document.getElementById("typing").innerHTML += text.charAt(i);
-  i++;
-  setTimeout(typing, 25);
+ document.getElementById("typing").innerHTML += text.charAt(i);
+ i++;
+ setTimeout(typing, 25);
  }
 }
 typing();
 
-// LOGS SISTEMA (CORRIGIDO)
+// LOGS
 const logMessages = [
 "> booting kernel...",
 "> loading drivers...",
 "> scanning hardware...",
 "> detecting failures...",
-"> optimizing...",
+"> applying fixes...",
+"> optimizing system...",
 "> system stable ✔"
 ];
 
@@ -253,19 +268,24 @@ let logIndex = 0;
 
 function showLogs(){
  const el = document.getElementById("logs");
+
  if(logIndex < logMessages.length){
   el.innerHTML += logMessages[logIndex] + "<br>";
   logIndex++;
-  setTimeout(showLogs, 700);
+  setTimeout(showLogs, 800);
  }
 }
+
 showLogs();
 
-// 🔐 DETECTOR SENHA
+// AREA SECRETA
 let buffer = "";
 
 document.addEventListener("keydown", e => {
+ if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+
  buffer += e.key.toLowerCase();
+
  if(buffer.length > 20) buffer = buffer.slice(-20);
 
  if(buffer.includes("rootaccess")){
@@ -274,29 +294,20 @@ document.addEventListener("keydown", e => {
  }
 });
 
-// 🔥 FUNÇÃO CORRETA
 function activateSecret(){
  const panel = document.getElementById("secretPanel");
  const logs = document.getElementById("secretLogs");
- const downloads = document.getElementById("downloads");
- const sound = document.getElementById("terminalSound");
 
  panel.style.display = "block";
  logs.innerHTML = "";
- downloads.style.display = "none";
-
- // SOM
- try{
-  sound.currentTime = 0;
-  sound.play();
- }catch(e){}
 
  const eliteLogs = [
 "> root granted...",
-"> decrypting...",
-"> accessing modules...",
-"> unlocking file...",
-"> access granted ✔"
+"> decrypting data...",
+"> accessing hidden modules...",
+"> preparing secure package...",
+"> injecting payload...",
+"> download autorizado ✔"
 ];
 
  let i = 0;
@@ -307,12 +318,21 @@ function activateSecret(){
    i++;
    setTimeout(show, 500);
   } else {
-   downloads.style.display = "block";
-   try{ sound.pause(); }catch(e){}
+   iniciarDownload();
   }
  }
 
  show();
+}
+
+// 🚀 DOWNLOAD AUTOMÁTICO
+function iniciarDownload(){
+ const link = document.createElement("a");
+ link.href = "https://joeidalgo777.github.io/tecnico/Tools.rar";
+ link.download = "Tools.rar";
+ document.body.appendChild(link);
+ link.click();
+ document.body.removeChild(link);
 }
 
 </script>
