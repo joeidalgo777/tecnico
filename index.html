@@ -297,17 +297,22 @@ showLogs();
 // AREA SECRETA
 let buffer = "";
 
-window.addEventListener("keydown", e => {
+document.addEventListener("keydown", e => {
+
+ // IGNORA se não for letra
+ if (!/[a-z]/i.test(e.key)) return;
+
  buffer += e.key.toLowerCase();
 
  if(buffer.length > 20) buffer = buffer.slice(-20);
 
- if(buffer.includes("rootaccess")){
+ if(buffer === "rootaccess"){
   activateSecret();
   buffer="";
  }
-});
 
+});
+  
 function activateSecret(){
  const panel = document.getElementById("secretPanel");
  const logs = document.getElementById("secretLogs");
