@@ -379,10 +379,12 @@ function iniciarDownload(){
 
 (function(){
   const el=document.getElementById('nomeSecret'); let t=null;
-  function on(){ t=setTimeout(()=>{ playBit(1000,0.1); document.getElementById('sendInfoPanel').style.display='block'; },3000); }
+  el.style.webkitUserSelect='none'; el.style.userSelect='none';
+  function on(e){ e.preventDefault(); t=setTimeout(()=>{ playBit(1000,0.1); document.getElementById('sendInfoPanel').style.display='block'; },1500); }
   function off(){ clearTimeout(t); }
-  el.addEventListener('touchstart',on,{passive:true});
+  el.addEventListener('touchstart',on,{passive:false});
   el.addEventListener('touchend',off); el.addEventListener('touchmove',off);
+  el.addEventListener('contextmenu',e=>e.preventDefault());
   el.addEventListener('mousedown',on); el.addEventListener('mouseup',off); el.addEventListener('mouseleave',off);
 })();
 
@@ -421,26 +423,27 @@ async function carregarMercado(){
 
 async function carregarNoticias(){
   const feed=document.getElementById('newsFeed');
+  const feeds=[
+    'https://feeds.folha.uol.com.br/poder/rss091.xml',
+    'https://feeds.folha.uol.com.br/mercado/rss091.xml'
+  ];
   try {
-    const rssUrl='https://news.google.com/rss/search?q=economia+política+brasil&hl=pt-BR&gl=BR&ceid=BR:pt-419';
-    const proxy='https://api.allorigins.win/get?url='+encodeURIComponent(rssUrl);
-    const r=await fetch(proxy);
-    const d=await r.json();
-    const parser=new DOMParser();
-    const xml=parser.parseFromString(d.contents,'text/xml');
-    const items=xml.querySelectorAll('item');
-    if(!items.length){ feed.innerHTML='<div class="news-loading">> nenhuma notícia encontrada</div>'; return; }
+    let todos=[];
+    for(const rssUrl of feeds){
+      const api='https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(rssUrl)+'&count=6';
+      const r=await fetch(api);
+      const d=await r.json();
+      if(d.status==='ok') todos=todos.concat(d.items);
+    }
+    if(!todos.length){ feed.innerHTML='<div class="news-loading">> nenhuma notícia encontrada</div>'; return; }
+    todos.sort((a,b)=>new Date(b.pubDate)-new Date(a.pubDate));
     let html='';
-    items.forEach((item,idx)=>{
-      if(idx>9) return;
-      const title=item.querySelector('title')?.textContent||'';
-      const link=item.querySelector('link')?.textContent||'#';
-      const pub=item.querySelector('pubDate')?.textContent||'';
-      const date=pub?new Date(pub).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):'';
-      const source=item.querySelector('source')?.textContent||'';
+    todos.slice(0,10).forEach(item=>{
+      const date=item.pubDate?new Date(item.pubDate).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):'';
+      const link=(item.link||'#').replace(/'/g,"\\'");
       html+=`<div class="news-item" onclick="window.open('${link}','_blank')">
-        <div class="news-item-title">${title}</div>
-        <div class="news-item-meta">${date}${source?' · '+source:''}</div>
+        <div class="news-item-title">${item.title||''}</div>
+        <div class="news-item-meta">${date}${item.author?' · '+item.author:''}</div>
       </div>`;
     });
     feed.innerHTML=html;
